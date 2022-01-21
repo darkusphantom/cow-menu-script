@@ -1,0 +1,8 @@
+#!/bin/bash
+# showargs
+# this script shows all arguments used when starting the script
+
+echo the arguments are $@ # $@ is tread as separate strings
+echo the arguments are $* # $* is tread as one text strings
+
+exit 0
