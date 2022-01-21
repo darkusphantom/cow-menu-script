@@ -1,0 +1,18 @@
+#!/bin/bash
+#
+# dirscript
+#
+# Silly script that creates a directory with a certain name
+# next sets $USER and $GROUP as the owners os fe directory
+# and finally changes the permission mode to 770
+
+DIRECTORY==/blah
+USER=Dorime
+GROUP=Devs
+
+mkdir $DIRECTORY
+chown $USER $DIRECTORY
+chgrp $GROUP $DIRECTORY
+chmod 770 $DIRECTORY
+
+exit 0

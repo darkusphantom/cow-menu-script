@@ -1,0 +1,4 @@
+#!/bin/bash
+HAPPY=yes
+ANGRY=no
+SUNNY=yes
