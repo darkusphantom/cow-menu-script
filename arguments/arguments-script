@@ -1,0 +1,17 @@
+#!/bin/bash
+#
+#argscript
+#Silly script that shows how arguments are used
+
+ARG1=$1
+ARG2=$2
+ARG3=$3
+SCRIPTNAME=$0
+
+echo The name of this var is $SCRIPTNAME
+echo the first argument used is $ARG1
+echo the second argument used is $ARG2
+echo the third argument used is $ARG3
+exit 0
+
+# La variable $0, retorna el nombre del archivo. A partir del $1 en adelante es que recibe los datos del usuario y los guarda en las variables

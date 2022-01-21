@@ -1,0 +1,8 @@
+#!/bin/bash
+#
+# countargs
+# sample script that shows how many arguments were used
+
+echo the number of arguments is $#
+
+exit 0

@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+#dirscript
+#Silly script that creates a directory with a certain name
+#next sets $USER and $GROUP as the ownersss of the directory
+#and finally changes the permission mode to 770
+#Provide the directory name first, followed by the username and
+#finally the group name
+
+DIRECTORY=$1
+USER=$2
+GROUP=$3
+
+mkdir /$DIRECTORY
+#mkdir $DIRECTORY #en caso de que no funcione el de arriba, usar este
+chown $USER $DIRECTORY
+chgrp $GROUP $DIRECTORY
+chmod 770 $DIRECTORY
+
+exit 0
