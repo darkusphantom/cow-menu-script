@@ -3,9 +3,9 @@
 # variables de entorno configuradas, informacion de programa y backup de informacion
 
 option=0
+optionFile=0
 
-introduction_menu() {
-  clear
+introductionMenu() {
   cowsay "Hola humano. Bienvenido. Por favor, ¿Qué se le ofrece?"
   echo -e "\nMenu de opciones:"
   echo "1. Procesos actuales."
@@ -14,9 +14,26 @@ introduction_menu() {
   echo "4. Información de Red."
   echo "5. Variables de entorno configuradas."
   echo "6. Información Programa."
-  echo "7. Backup información"
-  echo "8. Salir"
+  echo "7. Comprimir información"
+  echo "8. Backup información"
+  echo "9. Modificar un archivo (Crear, eliminar, renombrar...)"
+  echo "10. Salir"
   read -p "Ingrese una opción: " option
+  echo -e "\n"
+}
+
+fileMenu() {
+  clear
+  cowsay "Ha elegido la opción $option. ¿Qué deseas hacer con el archivo?"
+  echo -e "\nOpciones:"
+  echo "1. Crear archivo."
+  echo "2. Modificar en el archivo."
+  echo "3. Renombrar archivo."
+  echo "4. Mover archivo."
+  echo "5. Borrar archivo."
+  echo "6. Ver archivos del directorio."
+  echo "7. Salir"
+  read -p "Ingrese una opción: " optionFile
   echo -e "\n"
 }
 
@@ -65,6 +82,21 @@ showProgramSystem() {
   sleep 3
 }
 
+compressFile() {
+  cowsay "Ha elegido la opción $option. ¿Comprimimos?"
+  
+  fileName=''
+  directoryName=''
+  read -p "Ingrese el nombre que llevara el archivo comprimido: " fileName
+  read -p "Ingrese el directorio que deseas comprimir (Si es el actual, escribe '.'): " directoryName
+
+  tar -cvf $fileName $directoryName
+  cowsay "Compresión de archivos de manera exitosa."
+  sleep 1
+  ls -la
+  sleep 3
+}
+
 doBackup() {
   cowsay "Ha elegido la opción $option. ¿Hacemos un Backup?"
   sleep 3
@@ -72,7 +104,23 @@ doBackup() {
   sleep 2
 }
 
+createFile() {
+  fileName=''
+  read -p "Ingrese el nombre del archivo: " fileName
+  touch $fileName
+  cowsay "La creación del archivo ha sido exitosa."
+  sleep 2
+}
+
+writeFile() {
+  read -p "Ubiquese donde está el archivo e ingrese el nombre: " fileName
+  nano $fileName
+  cowsay "La modificación del archivo ha sido exitosa."
+  sleep 2
+}
+
 exitMenu() {
+  clear
   cowsay "Saliendo del programa... hasta la proxima"
   sleep 2
   clear
@@ -80,7 +128,8 @@ exitMenu() {
 }
 
 while :; do
-  introduction_menu
+  clear
+  introductionMenu
 
   case $option in
     1 ) showProcess ;;
@@ -89,7 +138,19 @@ while :; do
     4 ) showNetworkInformation ;;
     5 ) showEnviromentsVar ;;
     6 ) showProgramSystem ;;
-    7 ) doBackup ;;
-    8 ) exitMenu ;;
+    7 ) compressFile ;;
+    8 ) doBackup ;;
+    9 )
+      clear
+      fileMenu
+
+      case $optionFile in
+        1 ) createFile ;;
+        2 ) writeFile ;;
+        8 ) exitMenu ;;
+      esac
+
+      ;;
+    10 ) exitMenu ;;
   esac
 done
